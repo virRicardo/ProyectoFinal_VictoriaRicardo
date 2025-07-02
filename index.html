@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi simulador de viajes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Simulador de Costo de Viajes</h2>
+
+        <label for="totalKm">Total de Kilometros:</label>
+        <input type="number" id="totalKm" placeholder="Total Km">
+
+        <label for="totalNoches">Total de noches de hotel:</label>
+        <input type="number" id="totalNoches" placeholder="Total de noches">
+
+        <button id="calcularBtn">Calcular Costo Total</button>
+
+
+
+        <button id="otraSimulacionBtn" class="hidden">Realizar otra simulaion</button>
+
+
+
+
+        <div id="resultado" class="hidden result">
+            <p><strong>Resumen del viaje:</strong></p>
+            <p id="resultadoKm">Kilometros: </p>
+            <p id="resultadoNoches">Noches de hotel: </p>
+            <p id="resultadoNafta">Costo de combustible: </p>
+            <p id="resultadoHotel">Costo de hotel: </p>
+            <p id="resultadoTotal">Costo total del viaje: </p>
+        </div>
+        <button id="borrarSimulacionesBtn">Borrar simulaciones</button>
+
+
+        <div id="simulacionesPrevias">
+            <ul id="simulacionesList"></ul>
+        </div>
+        <div id="mensajeError"></div>
+    </div>
+
+
+
+</body>
+
+</html>
