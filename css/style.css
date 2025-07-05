@@ -1,14 +1,32 @@
+
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /*fondo claro*/
+    color: #212529;  /*txt oscuro*/
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+}
+
+#btnModoOscuro {
+    
+    padding: 10px 15px;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container{
+    
     max-width: 600px;
-    margin: 0 auto;
+    margin: 60px auto;
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -21,8 +39,32 @@ input, button{
     border-radius: 4px;
 }
 
+#borrarSimulacionesBtn {
+    position: relative;
+    /* NECESARIO para posicionar el ripple */
+    overflow: hidden;
+    /* Para que la onda no se desborde */
+    background-color: #35bbdc;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: ripple-animation 600ms linear;
+    pointer-events: none;
+}
+
 h2{
     text-align: center;
+    color: black;
 }
 
 .result{
@@ -50,4 +92,50 @@ h2{
     margin: 5px 0;
     padding: 10px;
     border-radius: 4px;
+}
+
+/*Estilos para el Modo Oscuro*/
+
+body.dark-mode {
+    background-color: #343a40;
+    color: #e2e6ea;
+}
+
+body.dark-mode #btnModoOscuro{
+    background-color: #212529;
+    color: #e2e6ea;
+    border: 1px solid #66b3ff;
+}
+body.dark-mode h1, body.dark-mode h2, body.dark-mode div{
+color: #66b3ff;
+}
+
+
+body.dark-mode .container {
+    background-color: #495057;
+    color: #e2e6ea;
+}
+
+body.dark-mode .result {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+body.dark-mode input,
+body.dark-mode button {
+    background-color: #343a40;
+    color: #ffffff;
+    border: 1px solid #adb5bd;
+}
+
+body.dark-mode #simulacionesPrevias li {
+    background: #495057;
+    color: #ffffff;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
