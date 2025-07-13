@@ -37,6 +37,7 @@ input, button{
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 #borrarSimulacionesBtn {
@@ -92,6 +93,20 @@ h2{
     margin: 5px 0;
     padding: 10px;
     border-radius: 4px;
+}
+
+.boton-hover{
+    padding: 4px 8px; 
+    font-size: 12px;
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.boton-hover:hover{
+    transform: scale(1.1);
+    background-color:#35bbdc ;
 }
 
 /*Estilos para el Modo Oscuro*/

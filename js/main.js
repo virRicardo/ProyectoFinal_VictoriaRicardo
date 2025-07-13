@@ -66,7 +66,11 @@ function calcular(){
     totalNoches = parseInt(totalNochesInput.value);
 
     if(isNaN(totalKm) || totalKm <= 0 || isNaN(totalNoches) || totalNoches <= 0){
-        mostrarMensaje("Por favor ingresa valores válidos para los Kilometros y las noches de alojamiento.");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor ingresa valores válidos para los Kilometros y las noches de alojamiento.",
+        });
         return;
     }
 
@@ -100,11 +104,35 @@ function mostrarMensaje(mensaje){
 
 function mostrarSimulaciones(simulaciones){
     simulacionesList.innerHTML = ``;
+
     simulaciones.forEach(simulacion => {
         const li = document.createElement(`li`);
-        li.textContent = `simulación ${simulacion.numeroSimulacion} - Costo Total: $${simulacion.costoTotalViaje}`;
+        li.innerHTML = `simulación ${simulacion.numeroSimulacion} - Costo Total: $${simulacion.costoTotalViaje}
+        <button class = "verDetalle boton-hover">Ver detalles</button>
+        <button class ="borrarSimulacion boton-hover">Borrar</button>`;
+
+        li.querySelector(".verDetalle").addEventListener("click", ()=> {
+            resultadoKm.textContent = `Kilómetros: ${simulacion.totalKm} Km`;
+            resultadoNoches.textContent = `Noches de Hotel: ${simulacion.totalNoches}`;
+            resultadoNafta.textContent = `Costo de combustible: $${simulacion.totalKm * precioNaftaPorKm}`;
+            resultadoHotel.textContent = `Costo de hotel: $${simulacion.totalNoches * precioPorNocheHotel}`;
+            resultadoTotal.textContent = `Costo total del viaje: $${simulacion.costoTotalViaje}`;
+            resultadoDiv.classList.remove("hidden");
+        });
+
+        li.querySelector(".borrarSimulacion").addEventListener("click", ()=>{
+            borrarSimulacion(simulacion.numeroSimulacion);
+        });
+
         simulacionesList.appendChild(li);
     });
+}
+
+function borrarSimulacion(numeroSimulacion){
+    let simulaciones = JSON.parse(localStorage.getItem("todasLasSimulaciones")) || [];
+    simulaciones = simulaciones.filter(sim => sim.numeroSimulacion !== numeroSimulacion);
+    localStorage.setItem("todasLasSimulaciones", JSON.stringify(simulaciones));
+    mostrarSimulaciones(simulaciones);
 }
 
 function cargarSimulacionesPrevias(){
@@ -148,6 +176,20 @@ calcularBtn.addEventListener("click", ()=>{
 })
 
 otraSimulacionBtn.addEventListener('click', otraSimulacion);
+
+totalKmInput.addEventListener(`keydown`, function(e){
+    if(e.key === `Enter`){
+        e.preventDefault();
+        totalNochesInput.focus();
+    }
+});
+
+totalNochesInput.addEventListener(`keydown`, function(e){
+    if(e.key === `Enter`){
+        e.preventDefault();
+        calcularBtn.focus();
+    }
+});
 
 borrarSimulacionesBtn.addEventListener("click", function (e) {
 
