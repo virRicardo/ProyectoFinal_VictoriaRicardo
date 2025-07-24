@@ -1,37 +1,51 @@
 
+/* estilos generales */
 
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
     padding: 20px;
-    background-color: #f4f4f4; /*fondo claro*/
-    color: #212529;  /*txt oscuro*/
+    background-color: #eaeaea; /* fondo claro */
+    color: #212529;            /* texto oscuro */
     transition: background-color 0.3s ease, color 0.3s ease;
-    
 }
 
+h2, h3 {
+    text-align: center;
+    color: black;
+}
+
+/* Botón modo oscuro */
 #btnModoOscuro {
-    
-    padding: 10px 15px;
+    position: fixed; 
     top: 10px;
-    left: 10px;
-    cursor: pointer;
+    right: 30px;
+    padding: 10px 5px;       
+    font-size: 14px;        
+    background-color: transparent;
+    color: #212529;
     border: 1px solid black;
     border-radius: 4px;
+    cursor: pointer;
     z-index: 1000;
     transition: background-color 0.3s ease, color 0.3s ease;
+    max-width: 140px;
+    white-space: nowrap;     
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.container{
-    
+/* Contenedor principal */
+.container {
     max-width: 600px;
     margin: 60px auto;
-    background-color: white;
+    background-color: #f5f5f5;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-input, button{
+/* Inputs y botones generales */
+input, button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -40,11 +54,12 @@ input, button{
     cursor: pointer;
 }
 
+
+/* boton borrar (efecto ripple) */
+
 #borrarSimulacionesBtn {
     position: relative;
-    /* NECESARIO para posicionar el ripple */
-    overflow: hidden;
-    /* Para que la onda no se desborde */
+    overflow: hidden; /* evita que el ripple se desborde */
     background-color: #35bbdc;
     color: black;
     border: none;
@@ -52,6 +67,7 @@ input, button{
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    outline: none;
 }
 
 .ripple {
@@ -63,15 +79,19 @@ input, button{
     pointer-events: none;
 }
 
-h2{
-    text-align: center;
-    color: black;
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
 
-.result{
+/* resultados y simulaciones */
+
+.result {
     margin-top: 20px;
     padding: 15px;
-    background-color: #e2e2e2;
+    background-color: #dcdcdc;
     border-radius: 4px;
 }
 
@@ -89,14 +109,15 @@ h2{
 }
 
 #simulacionesPrevias li {
-    background: #f0f0f0;
+    background: #e0e0e0;
     margin: 5px 0;
     padding: 10px;
     border-radius: 4px;
 }
 
-.boton-hover{
-    padding: 4px 8px; 
+/* Botones pequeños */
+.boton-hover {
+    padding: 4px 8px;
     font-size: 12px;
     height: 35px;
     width: 100px;
@@ -104,29 +125,60 @@ h2{
     transition: transform 0.2s ease;
 }
 
-.boton-hover:hover{
+.boton-hover:hover {
     transform: scale(1.1);
-    background-color:#35bbdc ;
+    background-color: #35bbdc;
 }
 
-/*Estilos para el Modo Oscuro*/
+
+/* conversor millas a km */
+
+.grupo-millas-km {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color:#f5f5f5 ;
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.grupo-millas-km label,
+.grupo-millas-km input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+/* modo oscuro */
 
 body.dark-mode {
     background-color: #343a40;
     color: #e2e6ea;
 }
 
-body.dark-mode #btnModoOscuro{
+body.dark-mode #btnModoOscuro {
     background-color: #212529;
     color: #e2e6ea;
     border: 1px solid #66b3ff;
 }
-body.dark-mode h1, body.dark-mode h2, body.dark-mode div{
-color: #66b3ff;
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #66b3ff;
 }
 
-
-body.dark-mode .container {
+body.dark-mode .container,
+body.dark-mode .grupo-millas-km {
     background-color: #495057;
     color: #e2e6ea;
 }
@@ -146,11 +198,4 @@ body.dark-mode button {
 body.dark-mode #simulacionesPrevias li {
     background: #495057;
     color: #ffffff;
-}
-
-@keyframes ripple-animation {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
 }

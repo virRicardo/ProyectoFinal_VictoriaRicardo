@@ -23,6 +23,9 @@ const borrarSimulacionesBtn = document.getElementById(`borrarSimulacionesBtn`);
 const mensajeError = document.getElementById("mensajeError"); 
 const btnModoOscuro = document.getElementById("btnModoOscuro");
 const body = document.body;
+const totalMillasInput = document.getElementById("totalMillas");
+const kmConvertidosInput = document.getElementById(`kmConvertidos`);
+const API_KEY = "Rl8ADao7BFIs7C1ZsWmLKw==l3AHXIEswcxIuTmp";
 
 
 btnModoOscuro.addEventListener("click", () =>{
@@ -30,10 +33,10 @@ btnModoOscuro.addEventListener("click", () =>{
 
     if(body.classList.contains("dark-mode")){
         localStorage.setItem("tema", "dark");
-        btnModoOscuro.textContent = "Activar modo claro";
+        btnModoOscuro.textContent = "Clear mode";
     }else{
         localStorage.setItem("tema", "light");
-        btnModoOscuro.textContent = "Activar modo oscuro";
+        btnModoOscuro.textContent = "Dark mode";
     }
 });
 
@@ -41,10 +44,10 @@ document.addEventListener("DOMContentLoaded", () =>{
     const temaGuardado = localStorage.getItem("tema");
     if(temaGuardado === "dark"){
         body.classList.add("dark-mode");
-        btnModoOscuro.textContent = "Activar modo claro";
+        btnModoOscuro.textContent = "Clear mode";
     }else{
         body.classList.remove("dark-mode");
-        btnModoOscuro.textContent = "Activar modo oscuro";
+        btnModoOscuro.textContent = "Dark mode";
     }
 });
 
@@ -69,7 +72,7 @@ function calcular(){
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Por favor ingresa valores válidos para los Kilometros y las noches de alojamiento.",
+            text: "Por favor ingrese valores válidos para los Kilometros y para las noches de alojamiento.",
         });
         return;
     }
@@ -165,6 +168,28 @@ function otraSimulacion (){
     otraSimulacionBtn.classList.add(`hidden`);
 }
 
+//Conversor de millas a km con API 
+
+async function convertirMillasAKm(millas) {
+    try{
+        const response = await fetch(`https://api.api-ninjas.com/v1/unitconversion?amount=${millas}&unit=mile`, {
+            headers: {
+                'X-Api-Key': API_KEY
+            }
+        });
+
+        if (!response.ok) throw new Error("Error al convertir millas");
+
+        const data = await response.json();
+        return data.conversions.kilometer;
+
+    } catch (error) {
+        console.error(error);
+        Swal.fire("Error", "No se pudo convertir millas. Verifica tu conexión o API Key.", "error");
+        return null;
+    }
+}
+
 // Eventos
 
 calcularBtn.addEventListener('click', calcular);
@@ -216,6 +241,19 @@ borrarSimulacionesBtn.addEventListener("click", function (e) {
 
         setTimeout(() => ripple.remove(), 600);
     });
+
+
+totalMillasInput.addEventListener(`input`, async function () {
+    const millas = parseFloat(this.value);
+    if (isNaN(millas) || millas <= 0) return;
+
+    const km = await convertirMillasAKm(millas);
+    if (km !== null){
+        kmConvertidosInput.value = km.toFixed(2);
+    }
+});
+
+
 
 // Cargar simulaciones al iniciar la página
 cargarSimulacionesPrevias();

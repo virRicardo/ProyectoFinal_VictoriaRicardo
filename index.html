@@ -5,19 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi simulador de viajes</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/css.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="js/main.js" defer></script>
 
 </head>
 
 <body>
-    <button id="btnModoOscuro">Activar modo oscuro</button>
+    <button id="btnModoOscuro">Dark mode</button>
+
+    <div class="grupo-millas-km">
+        <h3>Conversor de Millas a KM</h3>
+
+
+        <label for="totalMillas">Millas:</label>
+        <input type="number" id="totalMillas" placeholder="Millas">
+
+        <label for="kmConvertidos">Km:</label>
+        <input type="number" id="kmConvertidos" placeholder="kilometros" readonly>
+    
+    </div>
+
     <div class="container">
         <h2>Simulador de Costo de Viajes</h2>
 
         <label for="totalKm">Total de Kilometros:</label>
-        <input type="number" id="totalKm" placeholder="Total Km">
+        <input type="number" id="totalKm" placeholder="Kilómetros">
+
+
 
         <label for="totalNoches">Total de noches de hotel:</label>
         <input type="number" id="totalNoches" placeholder="Total de noches">
