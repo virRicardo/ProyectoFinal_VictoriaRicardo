@@ -60,6 +60,6 @@ ProyectoFinal-RicardoVictoria/
 - Desarrollado por Ricardo Victoria.
 - Utiliza [SweetAlert2](https://sweetalert2.github.io/) y la API de [api-ninjas.com](https://api-ninjas.com/api/unitconversion).
 
-## Licencia
+
 
  
